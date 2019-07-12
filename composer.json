@@ -1,0 +1,29 @@
+{
+  "name": "eislambey/amp-mercure-publisher",
+  "description": "Async Mercure publisher for PHP based on Amp.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "amphp",
+    "mercure",
+    "async"
+  ],
+  "authors": [
+    {
+      "name": "emre can islambey",
+      "email": "eislambey@gmail.com"
+    }
+  ],
+  "require": {
+    "symfony/mercure": "^0.2.0",
+    "amphp/artax": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Islambey\\Amp\\Mercure\\": "src/"
+    }
+  }
+}
+
+
+
