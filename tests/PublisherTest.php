@@ -3,26 +3,33 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Mercure\Jwt\StaticJwtProvider;
+use Symfony\Component\Mercure\Update;
+use Amp\Success;
+use Islambey\Amp\Mercure\Publisher;
+use function Amp\Promise\wait;
 
 class PublisherTest extends TestCase
 {
     public function testPublish()
     {
-        $url = 'https://demo.mercure.rocks/hub';
         $jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InN1YnNjcmliZSI6WyJmb28iLCJiYXIiXSwicHVibGlzaCI6WyJmb28iXX19.LRLvirgONK13JgacQ_VbcjySbVhkSmHy3IznH3tA9PM';
-        $jwtProvider = new \Symfony\Component\Mercure\Jwt\StaticJwtProvider($jwt);
+        $jwtProvider = new StaticJwtProvider($jwt);
+        $update = new Update('https://example.com', 'data');
+        $success = new Success('id');
 
-        $publisher = new \Islambey\Amp\Mercure\Publisher($url, $jwtProvider);
+        $publisher = $this->getMockBuilder(Publisher::class)
+            ->setConstructorArgs(['https://example.com', $jwtProvider])
+            ->getMock();
 
-        $promise = \Amp\call(function () use ($publisher) {
-            $update = new \Symfony\Component\Mercure\Update('https://example.com/books/1.jsonld', 'Hello from Amp');
-            return yield $publisher->publish($update);
-        });
+        $publisher->expects($this->once())
+            ->method('publish')
+            ->with($update)
+            ->willReturn($success);
 
-        $id = \Amp\Promise\wait($promise);
+        $value = wait($publisher->publish($update));
 
-        $this->assertIsString($id);
-        $this->assertEquals(36, strlen($id));
+        $this->assertSame('id', $value);
     }
 
 }
