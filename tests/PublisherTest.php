@@ -41,4 +41,14 @@ class PublisherTest extends TestCase
         $this->assertSame('id', $value);
     }
 
+    public function testDefaultClientSet()
+    {
+        $publisher = new Publisher('https://example.com/hub', new StaticJwtProvider(''));
+
+        $reflection = new ReflectionClass($publisher);
+        $prop = $reflection->getProperty('client');
+        $prop->setAccessible(true);
+
+        $this->assertInstanceOf(\Amp\Artax\DefaultClient::class, $prop->getValue($publisher));
+    }
 }
