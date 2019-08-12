@@ -1,5 +1,5 @@
 {
-  "name": "islambey/amp-mercure-publisher",
+  "name": "eislambey/amp-mercure-publisher",
   "description": "Async Mercure publisher for PHP based on Amp.",
   "type": "library",
   "license": "MIT",

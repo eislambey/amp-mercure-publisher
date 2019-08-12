@@ -2,7 +2,7 @@
 Async Mercure publisher based on Amphp.
 
 ## Installation
-	composer require islambey/amp-mercure-publisher
+	composer require eislambey/amp-mercure-publisher
 
 ## Usage
 ```php
