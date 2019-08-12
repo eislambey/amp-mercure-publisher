@@ -28,3 +28,6 @@ Loop::run(function () {
 
 ## Tests
 	composer test
+
+## License
+The MIT License. See [LICENSE](./LICENSE)
