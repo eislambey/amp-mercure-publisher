@@ -2,15 +2,14 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use PHPUnit\Framework\TestCase;
+use Amp\PHPUnit\AsyncTestCase;
 use Symfony\Component\Mercure\Jwt\StaticJwtProvider;
 use Symfony\Component\Mercure\Update;
 use Amp\Success;
 use Islambey\Amp\Mercure\Publisher;
-use function Amp\Promise\wait;
 use Amp\Artax\Request;
 
-class PublisherTest extends TestCase
+class PublisherTest extends AsyncTestCase
 {
     public function testPublish()
     {
@@ -36,7 +35,7 @@ class PublisherTest extends TestCase
             ->willReturn(new Success($response));
 
         $publisher = new Publisher($hubUri, $jwtProvider, $httpClient);
-        $value = wait($publisher->publish($update));
+        $value = yield $publisher->publish($update);
 
         $this->assertSame('id', $value);
     }
