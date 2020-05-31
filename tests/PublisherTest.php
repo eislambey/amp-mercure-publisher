@@ -53,6 +53,6 @@ class PublisherTest extends AsyncTestCase
         $prop = $reflection->getProperty('client');
         $prop->setAccessible(true);
 
-        $this->assertInstanceOf(\Amp\Artax\DefaultClient::class, $prop->getValue($publisher));
+        $this->assertInstanceOf(DefaultClient::class, $prop->getValue($publisher));
     }
 }
