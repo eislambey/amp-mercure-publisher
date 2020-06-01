@@ -31,7 +31,7 @@ class Publisher
         $update = [
             'topic' => $update->getTopics(),
             'data' => $update->getData(),
-            'target' => $update->getTargets(),
+            'private' => $update->isPrivate(),
             'id' => $update->getId(),
             'type' => $update->getType(),
             'retry' => $update->getRetry(),

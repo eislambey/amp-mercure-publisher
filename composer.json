@@ -15,7 +15,8 @@
     }
   ],
   "require": {
-    "symfony/mercure": "^0.2.0",
+    "php": ">=7.1.3",
+    "symfony/mercure": "^0.4.0",
     "amphp/artax": "^3.0"
   },
   "autoload": {
